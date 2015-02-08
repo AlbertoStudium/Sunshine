@@ -1,11 +1,13 @@
 package com.example.android.sunshine.app;
 
+import ConnectionHTTPAndroid.ConecctionHTTPRequest;
 import android.content.Context;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.ActionBar;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
 import android.text.Layout;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -16,6 +18,9 @@ import android.widget.Adapter;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
+import java.io.IOException;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -98,6 +103,18 @@ public class MainActivity extends ActionBarActivity {
                      weekForcast);
 
             listview.setAdapter(mForcastAdapter);
+
+           try {
+
+               URL url = new URL("http://api.openweathermap.org/data/2.5/forecast/daily?q=seville&mode=json&cnt=7&units=metric");
+               ConecctionHTTPRequest task = new ConecctionHTTPRequest();
+               String result = task.execute(url).get();
+
+           }catch (Exception e){
+
+               Log.e("PlaceholderFragment", "Error abriendo la conexion", e);
+           }
+
 
 
 
